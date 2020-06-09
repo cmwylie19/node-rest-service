@@ -1,0 +1,44 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/app.js",
+  "scripts": {
+    "prettier": "prettier --write \"{,!(node_modules|dist|build|coverage)/**/}*.{js,jsx,ts,tsx,json}\"",
+    "pre-commit": "npm run tslint:fix && npm run prettier && yarn build && yarn test",
+    "tslint": "tslint --project tsconfig.json",
+    "tslint:fix": "tslint --project tsconfig.json --fix",
+    "start": "tsc && node dist/app.js",
+    "build": "tsc",
+    "dev": "nodemon -L",
+    "server": "node ./dist/server.js",
+    "test": "jest"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Casey Wylie",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.16.1",
+    "husky": "^4.2.5",
+    "nodemon": "^2.0.4",
+    "npm-check-updates": "^6.0.1",
+    "prettier": "^2.0.5",
+    "supertest": "^4.0.2",
+    "ts-node": "^8.10.2",
+    "tslint": "^5.20.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.9.5"
+  },
+  "dependencies": {
+    "@types/jest": "^25.2.3",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.16.4",
+    "express-pino-logger": "^5.0.0",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.1.0"
+  }
+}

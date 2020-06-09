@@ -1,0 +1,105 @@
+openapi: 3.0.0
+info:
+  description: defaultDescription
+  version: "0.1-oas3"
+  title: defaultTitle
+paths:
+  /users/cwylie@redhat.com:
+    get:
+      responses:
+        "200":
+          description: Definition generated from Swagger Inspector
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Model3"
+    put:
+      responses:
+        "200":
+          description: Definition generated from Swagger Inspector
+          content:
+            text/html:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Model0"
+    delete:
+      responses:
+        "200":
+          description: Definition generated from Swagger Inspector
+          content:
+            text/html:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Model1"
+  /users:
+    get:
+      responses:
+        "200":
+          description: Definition generated from Swagger Inspector
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Model4"
+    post:
+      responses:
+        "200":
+          description: Definition generated from Swagger Inspector
+          content:
+            text/html:
+              schema:
+                type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Model2"
+components:
+  schemas:
+    Model0:
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
+    Model1:
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
+    Model2:
+      properties:
+        email:
+          type: string
+        name:
+          type: string
+        role:
+          type: string
+    Model3:
+      properties:
+        name:
+          type: string
+        role:
+          type: string
+    Model4:
+      properties:
+        cwylie@redhat.com:
+          $ref: "#/components/schemas/Cwylie_redhat.com"
+    Cwylie_redhat.com:
+      properties:
+        name:
+          type: string
+        role:
+          type: string
