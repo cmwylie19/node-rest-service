@@ -5,14 +5,16 @@
   "main": "dist/app.js",
   "scripts": {
     "prettier": "prettier --write \"{,!(node_modules|dist|build|coverage)/**/}*.{js,jsx,ts,tsx,json}\"",
-    "pre-commit": "npm run tslint:fix && npm run prettier && yarn build && yarn test",
+    "pre-commit": "npm run tslint:fix && npm run prettier && npm run build && npm run test",
     "tslint": "tslint --project tsconfig.json",
     "tslint:fix": "tslint --project tsconfig.json --fix",
     "start": "tsc && node dist/app.js",
     "build": "tsc",
     "dev": "nodemon -L",
     "server": "node ./dist/server.js",
-    "test": "jest"
+   "test": "jest --watchAll --coverage --silent",
+    "test:unit": "jest --coverage --silent",
+    "test:cov": "jest --coverage"
   },
   "keywords": [
     "nodejs"
@@ -40,5 +42,19 @@
     "express-pino-logger": "^5.0.0",
     "jest": "^26.0.1",
     "ts-jest": "^26.1.0"
+  },
+ "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
   }
 }

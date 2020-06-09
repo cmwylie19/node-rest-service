@@ -1,17 +1,21 @@
-import { Request, Response } from 'express'
+// import { any, any } from 'express'
 
 export class MainController {
 
   public users = {};
 
-  public responseTemplate(code: any, message: any, res: Response) {
-    res.status(code).send(message)
+  public responseTemplate(code: any, message: any, res: any) {
+
+    if (process.env.NODE_ENV !== "test") {
+      res.status(code).send(message);
+    }
+    return true;
   }
-  public getUsers(req: Request, res: Response) {
+  public getUsers(req: any, res: any) {
     this.responseTemplate(200, this.users, res)
   }
 
-  public createUser(req: Request, res: Response) {
+  public createUser(req: any, res: any) {
     const { email, name, role } = req.body;
     if (!this.users[email]) {
       this.users[email] = {
@@ -25,7 +29,7 @@ export class MainController {
     }
   }
 
-  public editUser(req: Request, res: Response) {
+  public editUser(req: any, res: any) {
     if (this.users[req.params.email]) {
       this.users[req.params.email] = {
         name: req.body.name,
@@ -37,7 +41,7 @@ export class MainController {
       this.responseTemplate(400, "User not found", res);
     }
   }
-  public deleteUser(req: Request, res: Response) {
+  public deleteUser(req: any, res: any) {
     if (this.users[req.params.email]) {
       delete this.users[req.params.email];
       this.responseTemplate(200, "OK", res);
@@ -46,7 +50,7 @@ export class MainController {
     }
   }
 
-  public getUser(req: Request, res: Response) {
+  public getUser(req: any, res: any) {
     if (this.users[req.params.email]) {
       this.responseTemplate(200, this.users[req.params.email], res)
     } else {

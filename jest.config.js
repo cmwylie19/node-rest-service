@@ -1,19 +1,12 @@
 module.exports = {
-  moduleFileExtensions: ["ts", "tsx", "js", "json"],
-  transform: {
-    "^.+\\.(ts|tsx)$": "ts-jest"
-  },
-  globals: {
-    "ts-jest": {
-      tsConfigFile: "tsconfig.json"
+    roots: ['<rootDir>/src'],
+    coveragePathIgnorePatterns: ['<rootDir>/src/__mocks__/*', '<rootDir>/src/models/*', '<rootDir>/src/config/*'],
+    moduleNameMapper: {
+      '\\.(css|less)$': 'identity-obj-proxy'
+    },
+    resolver: null,
+    transform: {
+      '^.+\\.ts?$': 'ts-jest',
     }
-  },
-  testMatch: ["**/__tests__/specs/**/*.+(ts|tsx|js)"],
-  testPathIgnorePatterns: ["/node_modules/", "/dist/", "/lib/"],
-
-
-
-  setupTestFrameworkScriptFile: "./__tests__/setup.ts",
-  verbose: true,
-  testURL: "http://localhost/"
-};
+  };
+  

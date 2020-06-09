@@ -1,7 +1,7 @@
 import * as express from 'express'
 import { mainController } from "../controllers/MainController"
 
-class MainRoutes {
+export class MainRoutes {
   public router: express.Router = express.Router();
 
   constructor() {
