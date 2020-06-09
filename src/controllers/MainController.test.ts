@@ -16,6 +16,7 @@ describe("MainController class", () => {
     status?: any
     send?: any
   }
+
   const res: IResponse = {
     send: a => a,
     status: code => code
@@ -24,9 +25,8 @@ describe("MainController class", () => {
   const req: IRequest = {
     body: {
       email: "test@redhat.com",
-      role: "test",
-      // tslint:disable-next-line:object-literal-sort-keys
-      name: "Test User"
+      name: "Test User",
+      role: "test"
     },
     params: {
       email: "test@redhat.com"
@@ -40,8 +40,8 @@ describe("MainController class", () => {
   })
 
   it('MainCroller responeTemplate function', () => {
-    let ans = mainController.responseTemplate(200, "test", res)
-    expect(ans).toBe(true)
+    const result: boolean = mainController.responseTemplate(200, "test", res)
+    expect(result).toBe(true)
   })
   it('MainController getUsers function', () => {
     mainController.getUsers(req, res)

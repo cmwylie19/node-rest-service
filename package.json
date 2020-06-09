@@ -12,9 +12,9 @@
     "build": "tsc",
     "dev": "nodemon -L",
     "server": "node ./dist/server.js",
-   "test": "jest --watchAll --coverage --silent",
+    "test": "jest --watchAll --coverage --silent",
     "test:unit": "jest --coverage --silent",
-    "test:cov": "jest --coverage"
+    "test:cov": "jest --coverage --silent"
   },
   "keywords": [
     "nodejs"
@@ -32,10 +32,14 @@
     "ts-node": "^8.10.2",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.5",
+    "unmock": "^0.3.18",
+    "unmock-jest": "^0.3.18",
+    "unmock-jest-runner": "0.0.0"
   },
   "dependencies": {
     "@types/jest": "^25.2.3",
+    "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.16.4",
@@ -43,7 +47,7 @@
     "jest": "^26.0.1",
     "ts-jest": "^26.1.0"
   },
- "jest": {
+  "jest": {
     "moduleFileExtensions": [
       "js",
       "json",

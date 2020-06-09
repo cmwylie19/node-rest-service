@@ -4,5 +4,4 @@ describe("MainRoutes class", () => {
   it("should return an instance of the routes", () => {
     expect(mainRoutes).toBeDefined()
   })
-
 })

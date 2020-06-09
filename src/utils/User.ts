@@ -1,11 +1,17 @@
-export class User {
-  readonly name: string;
+export interface IUser {
+  name: string;
+  email: string;
+  role: string;
+}
 
-  constructor(name: string) {
-    this.name = name;
+export class User {
+  protected user: IUser;
+
+  constructor(user: IUser) {
+    this.user = user;
   }
 
-  get username() {
-    return this.name;
+  public me(): IUser {
+    return this.user;
   }
 }

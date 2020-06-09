@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1591722769494" clover="3.2.0">
-  <project timestamp="1591722769494" name="All files">
-    <metrics statements="54" coveredstatements="48" conditionals="14" coveredconditionals="8" methods="17" coveredmethods="12" elements="85" coveredelements="68" complexity="0" loc="54" ncloc="54" packages="3" files="4" classes="4"/>
+<coverage generated="1591734083094" clover="3.2.0">
+  <project timestamp="1591734083095" name="All files">
+    <metrics statements="68" coveredstatements="62" conditionals="17" coveredconditionals="11" methods="20" coveredmethods="15" elements="105" coveredelements="88" complexity="0" loc="68" ncloc="68" packages="4" files="6" classes="6"/>
     <package name="src">
       <metrics statements="20" coveredstatements="19" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="3"/>
       <file name="app.ts" path="/Users/cmwylie19/repositories/OpenAPI/backend/src/app.ts">
@@ -75,6 +75,29 @@
         <line num="15" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
         <line num="21" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="14" coveredstatements="14" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+      <file name="User.ts" path="/Users/cmwylie19/repositories/OpenAPI/backend/src/utils/User.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+      </file>
+      <file name="config.ts" path="/Users/cmwylie19/repositories/OpenAPI/backend/src/utils/config.ts">
+        <metrics statements="11" coveredstatements="11" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
       </file>
     </package>
   </project>
