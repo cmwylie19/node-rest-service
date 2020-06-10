@@ -1,18 +1,12 @@
 
+## Get started
+> npm i 
+> npm run dev
+> npm run test:cov
 
 ## OpenAPI Mock Server Tool Comparison
-- sandbox
-## unmock
-Describe as a tool to fuzz test REST API calls. 
 
-Has the ability 
-- mocklab
-- api sprout
-- apitive studio
-- fakeit
-- falcon heavy 
-- meeshkan
-- microcks
-- openapi mocker
-- connexion
-
+- unmock
+- openapi-mock
+- api-sprout
+- prism
