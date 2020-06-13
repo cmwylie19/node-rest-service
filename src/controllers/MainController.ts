@@ -64,6 +64,7 @@ export class MainController {
     }
   }
 
+  // checked against OpenAPI Spec
   public getUser(req: any, res: any) {
     if (this.users[req.params.email]) {
       this.responseTemplate(200, this.users[req.params.email], res)
