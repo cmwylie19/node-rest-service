@@ -39,7 +39,7 @@ export class MainController {
       this.responseTemplate(201, "OK", res);
     }
     else {
-      this.responseTemplate(409, " An acccount has been registered to that email.", res)
+      this.responseTemplate(409, "An acccount has been registered to that email.", res)
     }
   }
 
