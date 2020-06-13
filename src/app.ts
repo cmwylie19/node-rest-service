@@ -1,7 +1,7 @@
-import * as bodyParser from 'body-parser'
+import * as bodyParser from "body-parser";
 import "dotenv/config";
-import * as express from 'express'
-import { mainRoutes } from "./routes/MainRoutes"
+import * as express from "express";
+import { mainRoutes } from "./routes/MainRoutes";
 
 class App {
   public app: express.Application;
@@ -12,9 +12,9 @@ class App {
   }
 
   private config(): void {
-    this.app.use(bodyParser.json())
-    this.app.use(bodyParser.urlencoded({ extended: false }))
-    this.app.use("/users", mainRoutes)
+    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use("/users", mainRoutes);
   }
 }
 
