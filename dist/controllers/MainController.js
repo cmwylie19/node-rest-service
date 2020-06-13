@@ -1,4 +1,5 @@
 "use strict";
+// import { any, any } from 'express'
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.mainController = exports.MainController = void 0;
 class MainController {
@@ -6,7 +7,10 @@ class MainController {
         this.users = {};
     }
     responseTemplate(code, message, res) {
-        res.status(code).send(message);
+        if (process.env.NODE_ENV !== "test") {
+            res.status(code).send(message);
+        }
+        return true;
     }
     getUsers(req, res) {
         this.responseTemplate(200, this.users, res);

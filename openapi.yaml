@@ -34,21 +34,18 @@ paths:
               $ref: "#/components/schemas/User"
         required: true
       responses:
-        400:
-          description: Email already used.
-          content: {}
-        200:
-          description: successful operation
+        409:
+          description: conflict
           content:
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/User"
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
-        default:
-          description: successful operation
-          content: {}
+                $ref: "#/components/schemas/ApiResponse"
+        201:
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
       x-codegen-request-body-name: body
     get:
       tags:
@@ -58,14 +55,11 @@ paths:
       operationId: getUsers
       responses:
         200:
-          description: successful operation
+          description: List of users
           content:
             application/json:
               schema:
                 type: object
-                additionalProperties:
-                  type: integer
-                  format: int32
       # security:
       # - api_key: []
   /users/{email}:
@@ -83,12 +77,18 @@ paths:
           schema:
             type: string
       responses:
-        400:
-          description: Invalid email supplied
-          content: {}
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
         404:
-          description: User not found
-          content: {}
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
     get:
       tags:
         - users
@@ -103,20 +103,11 @@ paths:
             type: string
       responses:
         200:
-          description: successful operation
+          description: success
           content:
-            application/xml:
-              schema:
-                $ref: "#/components/schemas/User"
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
-        400:
-          description: Invalid username supplied
-          content: {}
-        404:
-          description: User not found
-          content: {}
+                $ref: "#/components/schemas/ListUsers"
     put:
       tags:
         - users
@@ -138,16 +129,59 @@ paths:
               $ref: "#/components/schemas/User"
         required: true
       responses:
-        400:
-          description: Invalid user supplied
-          content: {}
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
         404:
-          description: User not found
-          content: {}
-      x-codegen-request-body-name: body
+          description: not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+        500:
+          $ref: "#/components/responses/500ApiError"
+      # x-codegen-request-body-name: body
 
 components:
+  responses:
+    EmailNotFound:
+      description: Email not found.
+      content:
+        application/json:
+          schema:
+            type: string
+            example: Account not found registered to that email.
+    EmailRegistered:
+      description: Email exists.
+      content:
+        application/json:
+          schema:
+            type: string
+            example: An acccount has been registered to that email.
+
+    OkApiResponse:
+      description: successful
+      content:
+        application/json:
+          schema:
+            type: string
+            example: OK
+
+    500ApiError:
+      description: This is an unexpected 500ApiError
+      content:
+        application/json:
+          schema:
+            type: string
+
   schemas:
+    ApiResponse:
+      type: string
+      example: OK
+
     User:
       type: object
       properties:
@@ -157,8 +191,15 @@ components:
           type: string
         name:
           type: string
-      xml:
-        name: User
+    ListUsers:
+      type: object
+      additionalProperties:
+        type: string
+      properties:
+        email:
+          type: string
+        user:
+          type: object
     # ApiResponse:
     #   type: object
     #   properties:

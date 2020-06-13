@@ -1,0 +1,6 @@
+/var/
+/vendor/
+
+# compiled application
+/cmd/openapi-mock/openapi-mock
+/cmd/openapi-mock/openapi-mock.*

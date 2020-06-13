@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 class User {
-    constructor(name) {
-        this.name = name;
+    constructor(user) {
+        this.user = user;
     }
-    get username() {
-        return this.name;
+    me() {
+        return this.user;
     }
 }
 exports.User = User;
