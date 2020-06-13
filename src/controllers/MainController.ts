@@ -1,16 +1,30 @@
-// import { any, any } from 'express'
+export enum ResponseMessages {
+  CREATED = "New user has been created.",
+  CONFLICT = "This email is current being used.",
+  OK = "OK",
+  ACCEPTED = ""
+}
+
+
+interface ISquareConfig {
+  [propName: string]: any;
+}
+
+const keyValue: ISquareConfig = {}
+const test: string = "test";
+keyValue[test] = 0;
 
 export class MainController {
 
   public users = {};
 
   public responseTemplate(code: any, message: any, res: any) {
-
     if (process.env.NODE_ENV !== "test") {
       res.status(code).send(message);
     }
     return true;
   }
+
   public getUsers(req: any, res: any) {
     this.responseTemplate(200, this.users, res)
   }
@@ -22,10 +36,10 @@ export class MainController {
         name,
         role
       }
-      this.responseTemplate(200, "OK", res);
+      this.responseTemplate(201, "OK", res);
     }
     else {
-      this.responseTemplate(400, "User exists", res)
+      this.responseTemplate(409, "An acccount has been registered to that email.", res)
     }
   }
 

@@ -1,20 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LOG_LEVEL = exports.APP_ID = void 0;
+exports.setenv = void 0;
 const dotenv = require("dotenv");
-dotenv.config();
-let path;
-switch (process.env.NODE_ENV) {
-    case "test":
-        path = `${__dirname}/../../.env.test`;
-        break;
-    case "production":
-        path = `${__dirname}/../../.env.production`;
-        break;
-    default:
-        path = `${__dirname}/../../.env/development`;
+function setenv(argPath) {
+    dotenv.config();
+    let path;
+    switch (argPath) {
+        case "test":
+            path = `${__dirname}/../../.env.test`;
+            break;
+        case "production":
+            path = `${__dirname}/../../.env.production`;
+            break;
+        default:
+            path = `${__dirname}/../../.env.development`;
+    }
+    dotenv.config({ path });
+    return path;
 }
-dotenv.config({ path });
-exports.APP_ID = process.env.APP_ID;
-exports.LOG_LEVEL = process.env.LOG_LEVEL;
+exports.setenv = setenv;
 //# sourceMappingURL=config.js.map

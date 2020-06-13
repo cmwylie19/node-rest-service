@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mainRoutes = void 0;
+exports.mainRoutes = exports.MainRoutes = void 0;
 const express = require("express");
 const MainController_1 = require("../controllers/MainController");
 class MainRoutes {
@@ -16,5 +16,6 @@ class MainRoutes {
         this.router.delete("/:email", (req, res) => MainController_1.mainController.deleteUser(req, res));
     }
 }
+exports.MainRoutes = MainRoutes;
 exports.mainRoutes = new MainRoutes().router;
 //# sourceMappingURL=MainRoutes.js.map
