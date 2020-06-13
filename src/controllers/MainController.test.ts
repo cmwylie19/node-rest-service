@@ -1,4 +1,20 @@
-import { mainController } from "./MainController";
+import { ErrorSchema, mainController } from "./MainController";
+
+describe("ErrorSchema", () => {
+  it("AccountInUse", () => {
+    expect(ErrorSchema.AccountInUse).toBe(
+      "An acccount has been registered to that email."
+    );
+  });
+  it("EmailNotFound", () => {
+    expect(ErrorSchema.EmailNotFound).toBe(
+      "Account not found registered to that email."
+    );
+  });
+  it("OK", () => {
+    expect(ErrorSchema.OK).toBe("OK");
+  });
+});
 
 describe("MainController class", () => {
   interface IRequest {

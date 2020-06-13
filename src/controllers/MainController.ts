@@ -1,8 +1,7 @@
-export enum ResponseMessages {
-  CREATED = "New user has been created.",
-  CONFLICT = "This email is current being used.",
+export enum ErrorSchema {
+  AccountInUse = "An acccount has been registered to that email.",
+  EmailNotFound = "Account not found registered to that email.",
   OK = "OK",
-  ACCEPTED = "",
 }
 
 interface ISquareConfig {
@@ -36,11 +35,7 @@ export class MainController {
       };
       this.responseTemplate(201, "OK", res);
     } else {
-      this.responseTemplate(
-        409,
-        "An acccount has been registered to that email.",
-        res
-      );
+      this.responseTemplate(409, ErrorSchema.AccountInUse, res);
     }
   }
 
@@ -52,7 +47,7 @@ export class MainController {
       };
       this.responseTemplate(200, "OK", res);
     } else {
-      this.responseTemplate(400, "User not found", res);
+      this.responseTemplate(400, ErrorSchema.EmailNotFound, res);
     }
   }
   public deleteUser(req: any, res: any) {
@@ -60,7 +55,7 @@ export class MainController {
       delete this.users[req.params.email];
       this.responseTemplate(200, "OK", res);
     } else {
-      this.responseTemplate(400, "User not found", res);
+      this.responseTemplate(400, ErrorSchema.EmailNotFound, res);
     }
   }
 
@@ -69,7 +64,7 @@ export class MainController {
     if (this.users[req.params.email]) {
       this.responseTemplate(200, this.users[req.params.email], res);
     } else {
-      this.responseTemplate(400, "User not found", res);
+      this.responseTemplate(400, ErrorSchema.EmailNotFound, res);
     }
   }
 }

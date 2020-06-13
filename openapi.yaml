@@ -89,7 +89,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponseError"
+                $ref: "#/components/schemas/EmailNotFound"
     get:
       tags:
         - users
@@ -133,7 +133,7 @@ paths:
         content:
           "*/*":
             schema:
-              $ref: "#/components/schemas/EmailNotFound"
+              $ref: "#/components/schemas/User"
         required: true
       responses:
         200:
@@ -147,7 +147,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponseError"
+                $ref: "#/components/schemas/EmailNotFound"
       # x-codegen-request-body-name: body
 
 components:
