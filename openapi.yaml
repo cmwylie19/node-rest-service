@@ -34,18 +34,18 @@ paths:
               $ref: "#/components/schemas/User"
         required: true
       responses:
-        409:
+        400:
           description: conflict
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
-        201:
+                $ref: "#/components/schemas/AccountInUse"
+        200:
           description: created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: "#/components/schemas/ApiResponseOK"
       x-codegen-request-body-name: body
     get:
       tags:
@@ -60,6 +60,7 @@ paths:
             application/json:
               schema:
                 type: object
+
       # security:
       # - api_key: []
   /users/{email}:
@@ -82,13 +83,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
-        404:
-          description: not found
+                $ref: "#/components/schemas/ApiResponseOK"
+        400:
+          description: success
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
+                $ref: "#/components/schemas/EmailNotFound"
     get:
       tags:
         - users
@@ -107,7 +108,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListUsers"
+                $ref: "#/components/schemas/SingleUser"
+        400:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmailNotFound"
     put:
       tags:
         - users
@@ -134,15 +141,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
-        404:
-          description: not found
+                $ref: "#/components/schemas/ApiResponseOK"
+        400:
+          description: success
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ApiResponse"
-        500:
-          $ref: "#/components/responses/500ApiError"
+                $ref: "#/components/schemas/EmailNotFound"
       # x-codegen-request-body-name: body
 
 components:
@@ -169,19 +174,32 @@ components:
           schema:
             type: string
             example: OK
-
     500ApiError:
       description: This is an unexpected 500ApiError
       content:
         application/json:
           schema:
             type: string
-
   schemas:
-    ApiResponse:
+    AccountInUse:
+      type: string
+      example: An acccount has been registered to that email.
+    EmailNotFound:
+      type: string
+      example: Account not found registered to that email.
+    ApiResponseError:
+      type: string
+      example: User not found
+    ApiResponseOK:
       type: string
       example: OK
-
+    SingleUser:
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          type: string
     User:
       type: object
       properties:

@@ -1,69 +1,85 @@
-import { mainController } from './MainController'
+import { ErrorSchema, mainController } from "./MainController";
+
+describe("ErrorSchema", () => {
+  it("AccountInUse", () => {
+    expect(ErrorSchema.AccountInUse).toBe(
+      "An acccount has been registered to that email."
+    );
+  });
+  it("EmailNotFound", () => {
+    expect(ErrorSchema.EmailNotFound).toBe(
+      "Account not found registered to that email."
+    );
+  });
+  it("OK", () => {
+    expect(ErrorSchema.OK).toBe("OK");
+  });
+});
 
 describe("MainController class", () => {
   interface IRequest {
     params?: {
-      email?: string
-    },
+      email?: string;
+    };
     body?: {
-      email: string,
-      role: string,
-      name: string
-    }
+      email: string;
+      role: string;
+      name: string;
+    };
   }
 
   interface IResponse {
-    status?: any
-    send?: any
+    status?: any;
+    send?: any;
   }
 
   const res: IResponse = {
-    send: a => a,
-    status: code => code
-  }
+    send: (a) => a,
+    status: (code) => code,
+  };
 
   const req: IRequest = {
     body: {
       email: "test@redhat.com",
       name: "Test User",
-      role: "test"
+      role: "test",
     },
     params: {
-      email: "test@redhat.com"
-    }
+      email: "test@redhat.com",
+    },
   };
 
-  const responseTemplate: any = jest.spyOn(mainController, "responseTemplate")
+  const responseTemplate: any = jest.spyOn(mainController, "responseTemplate");
 
-  it('MainController class should be defined', () => {
+  it("MainController class should be defined", () => {
     expect(mainController).toBeDefined();
-  })
+  });
 
-  it('MainCroller responeTemplate function', () => {
-    const result: boolean = mainController.responseTemplate(200, "test", res)
-    expect(result).toBe(true)
-  })
-  it('MainController getUsers function', () => {
-    mainController.getUsers(req, res)
-    expect(responseTemplate).toHaveBeenCalled()
-  })
+  it("MainCroller responeTemplate function", () => {
+    const result: boolean = mainController.responseTemplate(200, "test", res);
+    expect(result).toBe(true);
+  });
+  it("MainController getUsers function", () => {
+    mainController.getUsers(req, res);
+    expect(responseTemplate).toHaveBeenCalled();
+  });
   it("MainController createUser function", () => {
     mainController.createUser(req, res);
-    expect(responseTemplate).toHaveBeenCalled()
-  })
+    expect(responseTemplate).toHaveBeenCalled();
+  });
 
   it("MainController editUser function", () => {
     mainController.editUser(req, res);
-    expect(responseTemplate).toHaveBeenCalled()
-  })
+    expect(responseTemplate).toHaveBeenCalled();
+  });
 
   it("MainController deleteUser function", () => {
     mainController.deleteUser(req, res);
-    expect(responseTemplate).toHaveBeenCalled()
-  })
+    expect(responseTemplate).toHaveBeenCalled();
+  });
 
   it("MainController getUser function", () => {
     mainController.getUser(req, res);
-    expect(responseTemplate).toHaveBeenCalled()
-  })
-})
+    expect(responseTemplate).toHaveBeenCalled();
+  });
+});
