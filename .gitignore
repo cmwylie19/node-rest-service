@@ -2,3 +2,8 @@ target
 Cargo.lock
 .env
 node_modules
+dist
+__html__
+apisprout
+htm
+unmock-examples
