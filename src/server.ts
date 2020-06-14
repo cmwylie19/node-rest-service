@@ -12,4 +12,6 @@ export const confirmationMessage = (error?) => {
   console.log(`Server listening on port ` + process.env.PORT);
   return true;
 };
+
 app.listen(process.env.PORT, confirmationMessage);
+export { app };

@@ -12,9 +12,9 @@
     "build": "tsc",
     "dev": "nodemon -L",
     "server": "node ./dist/server.js",
-    "test": "jest --watchAll --coverage --silent",
+    "test": "jest --watchAll --coverage --silent --testTimeout=10000 --detectOpenHandles",
     "test:unit": "jest --coverage --silent",
-    "test:cov": "jest --coverage --silent"
+    "test:cov": "jest --coverage --silent --testTimeout=10000"
   },
   "keywords": [
     "nodejs"
@@ -24,6 +24,7 @@
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.16.1",
+    "@types/supertest": "^2.0.9",
     "husky": "^4.2.5",
     "nodemon": "^2.0.4",
     "npm-check-updates": "^6.0.1",

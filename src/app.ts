@@ -3,7 +3,7 @@ import "dotenv/config";
 import * as express from "express";
 import { mainRoutes } from "./routes/MainRoutes";
 
-class App {
+export class App {
   public app: express.Application;
 
   constructor() {

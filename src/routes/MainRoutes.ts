@@ -8,7 +8,7 @@ export class MainRoutes {
     this.config();
   }
 
-  private config(): void {
+  public config(): void {
     this.router.get("/", (req: express.Request, res: express.Response) =>
       mainController.getUsers(req, res)
     );
@@ -30,3 +30,4 @@ export class MainRoutes {
 }
 
 export const mainRoutes = new MainRoutes().router;
+export const mr = new MainRoutes();
