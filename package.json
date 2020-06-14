@@ -12,9 +12,9 @@
     "build": "tsc",
     "dev": "nodemon -L",
     "server": "node ./dist/server.js",
-    "test": "jest --watchAll --coverage --silent",
+    "test": "jest --watchAll --coverage --silent --testTimeout=10000 --detectOpenHandles",
     "test:unit": "jest --coverage --silent",
-    "test:cov": "jest --coverage --silent"
+    "test:cov": "jest --coverage --silent --testTimeout=10000"
   },
   "keywords": [
     "nodejs"
@@ -28,7 +28,6 @@
     "nodemon": "^2.0.4",
     "npm-check-updates": "^6.0.1",
     "prettier": "^2.0.5",
-    "supertest": "^4.0.2",
     "ts-node": "^8.10.2",
     "tslint": "^5.20.1",
     "tslint-config-prettier": "^1.18.0",

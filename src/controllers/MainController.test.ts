@@ -49,6 +49,17 @@ describe("MainController class", () => {
     },
   };
 
+  const mockReq: IRequest = {
+    body: {
+      email: "test2@redhat.com",
+      name: "Test User",
+      role: "test",
+    },
+    params: {
+      email: "test2@redhat.com",
+    },
+  };
+
   const responseTemplate: any = jest.spyOn(mainController, "responseTemplate");
 
   it("MainController class should be defined", () => {
@@ -65,21 +76,25 @@ describe("MainController class", () => {
   });
   it("MainController createUser function", () => {
     mainController.createUser(req, res);
+    mainController.createUser(req, res);
     expect(responseTemplate).toHaveBeenCalled();
   });
 
   it("MainController editUser function", () => {
     mainController.editUser(req, res);
+    mainController.editUser(mockReq, res);
     expect(responseTemplate).toHaveBeenCalled();
   });
 
   it("MainController deleteUser function", () => {
     mainController.deleteUser(req, res);
+    mainController.deleteUser(mockReq, res);
     expect(responseTemplate).toHaveBeenCalled();
   });
 
   it("MainController getUser function", () => {
     mainController.getUser(req, res);
+    mainController.getUser(mockReq, res);
     expect(responseTemplate).toHaveBeenCalled();
   });
 });
