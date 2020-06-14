@@ -2,8 +2,7 @@ module.exports = {
   roots: ["<rootDir>/src"],
   coveragePathIgnorePatterns: [
     "<rootDir>/src/__mocks__/*",
-    "<rootDir>/src/models/*",
-    "<rootDir>/src/config/*",
+    "<rootDir>/src/routes/*"
   ],
   moduleNameMapper: {
     "\\.(css|less)$": "identity-obj-proxy",
