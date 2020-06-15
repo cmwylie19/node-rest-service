@@ -1,3 +1,17 @@
+# Overview
+
+The purpose of this repo is to demonstrate how to use several of the tools in the OpenAPI mock server space. One of the tools that we are going to analyze, hmt, has the ability to proxy actual backend requests and generate a spec based on the proxy logs, which is why we have a simple backend service written in NodeJS.
+
+## NodeJS User Service
+
+This is a simple, well tested, object oriented, typed NodeJS server with the following endpoints:
+```
+POST   /users
+GET    /users
+GET    /users/:email
+PUT    /users/:email
+DELETE /users/:email
+```
 
 ## Get started
 ```
@@ -5,6 +19,9 @@ npm i
 npm run dev
 npm run test:cov
 ```
+
+![GitHub Logo](tests.png)
+
 ## Tools under review
 
 - fakeit
