@@ -1,0 +1,243 @@
+openapi: 3.0.1
+info:
+  title: User API
+  description: This is an example API to update a users store.
+  # termsOfService: https://github.com/cmwylie19/node-rest-service.git
+  # contact:
+  #   email: cwylie@redhat.com
+  version: 1.0.0
+# externalDocs:
+#   description: Contract first development
+#   url: https://caseywylie.io/blog/openapi
+# servers:
+# - url: https://petstore.swagger.io/v2
+# - url: http://petstore.swagger.io/v2
+tags:
+  - name: users
+    description: Operations on users
+    # externalDocs:
+    #   description: Find out more about our store
+    #   url: http://swagger.io
+paths:
+  /users:
+    post:
+      tags:
+        - users
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        content:
+          "*/*":
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      responses:
+        400:
+          description: conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountInUse"
+        200:
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponseOK"
+      x-codegen-request-body-name: body
+    get:
+      tags:
+        - users
+      summary: Returns all users.
+      description: Returns a map of users by email
+      operationId: getUsers
+      responses:
+        200:
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: object
+
+      # security:
+      # - api_key: []
+  /users/{email}:
+    delete:
+      tags:
+        - users
+      summary: Delete user
+      description: Delete a user from the user store.
+      operationId: deleteUser
+      parameters:
+        - name: email
+          in: path
+          description: The email of the user that needs to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponseOK"
+        400:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmailNotFound"
+    get:
+      tags:
+        - users
+      summary: Get user by user name
+      operationId: getUser
+      parameters:
+        - name: email
+          in: path
+          description: Email of the user to get.
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SingleUser"
+        400:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmailNotFound"
+    put:
+      tags:
+        - users
+      summary: Updated user
+      description: Update a given user.
+      operationId: editUser
+      parameters:
+        - name: email
+          in: path
+          description: Email of user to be updated.
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updated user object
+        content:
+          "*/*":
+            schema:
+              $ref: "#/components/schemas/User"
+        required: true
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponseOK"
+        400:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmailNotFound"
+      # x-codegen-request-body-name: body
+
+components:
+  responses:
+    EmailNotFound:
+      description: Email not found.
+      content:
+        application/json:
+          schema:
+            type: string
+            example: Account not found registered to that email.
+    EmailRegistered:
+      description: Email exists.
+      content:
+        application/json:
+          schema:
+            type: string
+            example: An acccount has been registered to that email.
+
+    OkApiResponse:
+      description: successful
+      content:
+        application/json:
+          schema:
+            type: string
+            example: OK
+    500ApiError:
+      description: This is an unexpected 500ApiError
+      content:
+        application/json:
+          schema:
+            type: string
+  schemas:
+    AccountInUse:
+      type: string
+      example: An acccount has been registered to that email.
+    EmailNotFound:
+      type: string
+      example: Account not found registered to that email.
+    ApiResponseError:
+      type: string
+      example: User not found
+    ApiResponseOK:
+      type: string
+      example: OK
+    SingleUser:
+      type: object
+      properties:
+        name:
+          type: string
+        role:
+          type: string
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+        role:
+          type: string
+        name:
+          type: string
+    ListUsers:
+      type: object
+      additionalProperties:
+        type: string
+      properties:
+        email:
+          type: string
+        user:
+          type: object
+    # ApiResponse:
+    #   type: object
+    #   properties:
+    #     code:
+    #       type: integer
+    #       format: int32
+    #     type:
+    #       type: string
+    #     message:
+    #       type: string
+  # securitySchemes:
+  #   petstore_auth:
+  #     type: oauth2
+  #     flows:
+  #       implicit:
+  #         authorizationUrl: http://petstore.swagger.io/oauth/dialog
+  #         scopes:
+  #           write:pets: modify pets in your account
+  #           read:pets: read your pets
+  #   api_key:
+  #     type: apiKey
+  #     name: api_key
+  #     in: header
