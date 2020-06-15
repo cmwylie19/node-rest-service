@@ -103,3 +103,4 @@ Command line options:
     example:
     $ ./apisprout -s openapi.yml
     $ ./apisprout openapi.yml -p 3333
+    $ curl -G http://localhost:3333/users/__health
