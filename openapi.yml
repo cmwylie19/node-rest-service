@@ -2,22 +2,13 @@ openapi: 3.0.1
 info:
   title: User API
   description: This is an example API to update a users store.
-  # termsOfService: https://github.com/cmwylie19/node-rest-service.git
-  # contact:
-  #   email: cwylie@redhat.com
+  termsOfService: https://github.com/cmwylie19/node-rest-service.git
+  contact:
+    email: cwylie@redhat.com
   version: 1.0.0
-# externalDocs:
-#   description: Contract first development
-#   url: https://caseywylie.io/blog/openapi
-# servers:
-# - url: https://petstore.swagger.io/v2
-# - url: http://petstore.swagger.io/v2
 tags:
   - name: users
     description: Operations on users
-    # externalDocs:
-    #   description: Find out more about our store
-    #   url: http://swagger.io
 paths:
   /users:
     post:
@@ -29,7 +20,7 @@ paths:
       requestBody:
         description: Created user object
         content:
-          "*/*":
+          application/json:
             schema:
               $ref: "#/components/schemas/User"
         required: true
@@ -60,6 +51,17 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  name:
+                    type: string
+                  role:
+                    type: string
+                example:
+                  {
+                    "test@redhat.com": { "name": "Test User", "role": "test" },
+                    "test2@redhat.com":
+                      { "name": "Test User 2", "role": "test" },
+                  }
 
       # security:
       # - api_key: []
@@ -131,7 +133,7 @@ paths:
       requestBody:
         description: Updated user object
         content:
-          "*/*":
+          application/json:
             schema:
               $ref: "#/components/schemas/User"
         required: true
@@ -200,6 +202,7 @@ components:
           type: string
         role:
           type: string
+      example: { "name": "Test User", "role": "test" }
     User:
       type: object
       properties:
@@ -209,15 +212,6 @@ components:
           type: string
         name:
           type: string
-    ListUsers:
-      type: object
-      additionalProperties:
-        type: string
-      properties:
-        email:
-          type: string
-        user:
-          type: object
     # ApiResponse:
     #   type: object
     #   properties:

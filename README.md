@@ -1,10 +1,12 @@
-# Overview
+# 360 Enablement
 
-The purpose of this repo is to demonstrate how to use several of the tools in the OpenAPI mock server space. One of the tools that we are going to analyze, hmt, has the ability to proxy actual backend requests and generate a spec based on the proxy logs, which is why we have a simple backend service written in NodeJS.
+The purpose of this repo is to demo and describe the use cases around some tooling and libraries in the contract first development space. One of the tools that we are going to analyze, hmt, has the ability to proxy actual backend requests and generate a spec based on the proxy logs, which is why we have a simple backend service written in NodeJS. We will also use the NodeJS service top perform fuzz testing with `unmock`
+
 
 ## NodeJS User Service
+A dead simple, well tested,, object-oriented implementation of a webserver that can perform CRUD operations on a `user object`. 
 
-This is a simple, well tested, object oriented, typed NodeJS server with the following endpoints:
+Simple rest endpoints
 ```
 POST   /users
 GET    /users
@@ -13,70 +15,112 @@ PUT    /users/:email
 DELETE /users/:email
 ```
 
-## Get started
+The user object interface
+```
+enum IUser {
+    email: string,
+    name: string,
+    role: string
+}
+```
+Install the dependencies for the application.
 ```
 npm i 
-npm run dev
-npm run test:cov
-```
+````
 
+Run the unit tests.
+```
+npm run test:unit
+```
 ![GitHub Logo](tests.png)
 
-## Tools under review
+Run the application locallu.
+```
+npm run dev
+```
 
-- fakeit
-- api-sprout
-- unmock
-- prism
-
-## fakeit
-
-OpenAPI mock built with the motivation to control response generation in a non intrusive manner to support development against a contract.
-
-##### Features
-- radnom or static responses
-- request validation for json and mutlipart/form-data responses
+The postman collection  is the `ApiMockServer.postman_collection.json` file in the root of the repo, import the collection and run the app to start manipulating users.
 
 
-##### Installation
+## fakeit 
+[fakeit](https://github.com/JustinFeng/fakeit)
+
+This OpenAPI mock server built with the motivation to control response generation in a non intrusive manner to support development against a contract. 
+
+
+### Installation
 _make sure you are using ruby v2.7.1, if you have rvm use `rvm install 2.7.1` first_
 ```
 gem install fakeit
 ```
 
-##### Usage
+### Features
+- ran return random responses
+- can return object type defs
+- can return example responses
 
-    $ fakeit --spec <Local file or remote url>
+Now would be a good time to import the postman collection into postman and follow along but you can also follow along with `curl`.
+#### Return Type Defs
+We are going to run faker, supply the --spec argument for the OpenAPI spec file, -p to run the mock server on port 3333 and --static to return static responses
+```
+fakeit --spec openapi.yml -p 3333 --static       
+```
+Now in a different terminal hit the `GET` /users with a curl
+```
+curl -G http://localhost:3333/users
+```
+and `fakeit` will return the type definition of the `user` object.
 
-Command line options:
+```
+{
+    "name": "string",
+    "role": "string"
+}
+```
+#### Return Random Reponses
+The next way we are going to use `fakeit` is to return random responses, start fakeit from the terminal, --spec openapi.yml, -p 3333, --static-types
+```
+fakeit --spec openapi.yml -p 3333 --static-types
+```
+Your mock api server will now return random values of the given type specified in the OpenAPI spec.
 
-    $ fakeit --help
-    usage:
-        --spec               spec file uri (required)
-        -p, --port           custom port
-        -q, --quiet          mute request and response log
-        --permissive         log validation error as warning instead of denying request
-        --use-example        use example provided in spec if exists
-        --static             generate static response
-        --static-types       generate static value for specified types, e.g. --static-types integer,string
-        --static-properties  generate static value for specified properties, e.g. --static-properties id,uuid
+```
+curl -G http://localhost:3333/users
+```
+and `fakeit` will return a random string for name and a random string for role.
 
-    other options:
-        -v, --version
-        -h, --help
+```
+{
+    "name": "Things Fall Apart",
+    "role": "Dulce et Decorum Est"
+}
+```
+#### Return Example Responses
+In the event you want fakeit to return the example responses defined in the OpenAPI spec you can specify the `--use-example`
+```
+fakeit --spec openapi.yml -p 3333 --use-example
+```
+In another terminal
+```
+curl -G http://localhost:3333/users
+```
+and `fakeit` will return the example specified in the response of the spec
 
-    example:
-    $ fakeit --spec openapi.yml -p 3333 --static
-    $ fakeit --spec openapi.yml -p 3333 --static-types
+```
+{
+    "name": "Test User",
+    "role": "Role"
+}
+```
+
 
 ## apisprout
 
-Lightweight, blazing fast, cross-platform OpenAPI 3 mock server with Validation written in golang
+OpenAPI 3 mock server written in golang. apisproute returns _only the example responses defined in the OpenAPI spec_.
 
 ### Features
-- request validation for json and mutlipart/form-data responses
 - health check
-
+- log req.hostname
 
 ### Installation
 _make sure you have golang in your path_
@@ -84,42 +128,29 @@ _make sure you have golang in your path_
 go get github.com/danielgtaylor/apisprout
 ```
 
-### Usage
+#### Return Example Responses
+Start apisprout mock server listening on port 3333 and return example responses defined in the OpenAPI spec.
+```
+./apisproute -p 3333 openapi.yml
 
-    $ ./apisproute <Local file or remote url>
-Usage:
-  apisprout [flags] FILE
+```
+in another terminal 
+```
+curl -G http://localhost:3333/users/test@user.com
+```
+results in the following response 
+```
+{
+    "name": "Test User",
+    "role": "test"
+}
+```
 
-Examples:
-  ##### Basic usage
-  apisprout openapi.yaml
+now lets check the health of the mock server, you can expect a 200 response. 
+```
+curl -G http://localhost:3333/users/__health
+```
 
-  ##### Validate server name and use base path
-  apisprout --validate-server openapi.yaml
-
-  ##### Fetch API via HTTP with custom auth header
-  apisprout -H 'Authorization: abc123' http://example.com/openapi.yaml
-
-Flags:
- 
-
-Command line options:
-
-    $ apisprout --help
-    usage:
-        --add-server string   Add a new valid server URL, use with --validate-server
-        --disable-cors        Disable CORS headers
-        -H, --header string       Add a custom header when fetching API
-        -h, --help                help for apisprout
-        -p, --port int            HTTP port (default 8000)
-            --validate-request    Check request data structure
-        -s, --validate-server     Check scheme/hostname/basepath 
-        -w, --watch               Reload when input file changes
-
-    example:
-    $ ./apisprout -s openapi.yml
-    $ ./apisprout openapi.yml -p 3333
-    $ curl -G http://localhost:3333/users/__health
 
 ## HMT
 
@@ -215,4 +246,3 @@ Command line options:
 
     $ hmt build logs/localhost\:3333-recordings.jsonl --mode gen
     $ sudo hmt mock openapi.yml
-
