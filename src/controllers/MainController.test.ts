@@ -34,8 +34,8 @@ describe("MainController class", () => {
   }
 
   const res: IResponse = {
-    send: (a) => a,
-    status: (code) => code,
+    send: jest.fn(),
+    status: jest.fn(() => res),
   };
 
   const req: IRequest = {
@@ -67,6 +67,9 @@ describe("MainController class", () => {
   });
 
   it("MainCroller responeTemplate function", () => {
+    process.env.NODE_ENV = "SH";
+    mainController.responseTemplate(200, "test", res);
+    process.env.NODE_ENV = "test";
     const result: boolean = mainController.responseTemplate(200, "test", res);
     expect(result).toBe(true);
   });
@@ -93,6 +96,7 @@ describe("MainController class", () => {
   });
 
   it("MainController getUser function", () => {
+    mainController.createUser(req, res);
     mainController.getUser(req, res);
     mainController.getUser(mockReq, res);
     expect(responseTemplate).toHaveBeenCalled();

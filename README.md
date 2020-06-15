@@ -168,3 +168,51 @@ Command line options:
     $ hmt build logs/localhost\:3333-recordings.jsonl --mode gen
     $ sudo hmt mock openapi.yml
 
+## unmock
+
+Testing library for JavaScript. Fuzz test your rest calls. This is a node module for testing inside your project. Similar to a typical mock server but it does not need to be started from outside of the project
+```
+fuzz test - a form of testing where you verify the correctness of code by asserting that it behaves correctly with variable and unexpected input.
+```
+
+### Features
+- Integrates well with Jest, Mocka, Jasmine, Tap and Ava
+- provides a way to override rest endpoints to provide variable and optional responses in additional to different status codes.
+
+
+
+### Installation
+```
+npm i --save-dev unmock
+```
+##### Usage
+
+    $ hmt --help
+
+Command line options:
+
+    $ fakeit --help
+    usage:
+        --spec               spec file uri (required)
+        -p, --port           custom port
+        -q, --quiet          mute request and response log
+        --permissive         log validation error as warning instead of denying request
+        --use-example        use example provided in spec if exists
+        --static             generate static response
+        --static-types       generate static value for specified types, e.g. --static-types integer,string
+        --static-properties  generate static value for specified properties, e.g. --static-properties id,uuid
+
+    other options:
+        -v, --version
+        -h, --help
+
+    example:
+    In 3 different terminals
+    terminal 1: $ sudo hmt record
+    terminal 2: $ npm run dev
+    terminal 3: $ wget http://localhost:8000/http://localhost:3333/users/casewylie@gmail.com
+    terminal 3: wget http://localhost:8000/http://localhost:3333/users/cwylie@redhat.com
+
+    $ hmt build logs/localhost\:3333-recordings.jsonl --mode gen
+    $ sudo hmt mock openapi.yml
+
