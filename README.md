@@ -5,14 +5,14 @@ npm i
 npm run dev
 npm run test:cov
 ```
-## OpenAPI Mock Server Tool Comparison
+## Tools under review
 
-- unmock
-- openapi-mock
+- fakeit
 - api-sprout
+- unmock
 - prism
 
-#### Apisprout
+## fakeit
 
 OpenAPI mock built with the motivation to control response generation in a non intrusive manner to support development against a contract.
 
@@ -52,7 +52,7 @@ Command line options:
     $ fakeit --spec openapi.yml -p 3333 --static
     $ fakeit --spec openapi.yml -p 3333 --static-types
 
-## apiaprout
+## apisprout
 
 Lightweight, blazing fast, cross-platform OpenAPI 3 mock server with Validation written in golang
 
@@ -103,4 +103,51 @@ Command line options:
     $ ./apisprout -s openapi.yml
     $ ./apisprout openapi.yml -p 3333
     $ curl -G http://localhost:3333/users/__health
+
+## HMT
+
+Http Mocking Toolkit (HMT). Tool that mocks HTTP APIs for use in sandboxes as well as automated and explatoratory testing. It uses a combo of API definitions, recorded traffic and code in order to make crafting mocks as enjoyable as possible. _Provides a quick way to get up and running from an existing backend_
+
+### Features
+- create mocks of APIs from server traffic and OpenAPI specs.
+
+
+### Installation
+_make sure you have python in your path_
+```
+pip install hmt (Python 3.6+)
+OR
+brew tap meeshkan/tap
+brew install hmt
+```
+##### Usage
+
+    $ hmt --help
+
+Command line options:
+
+    $ fakeit --help
+    usage:
+        --spec               spec file uri (required)
+        -p, --port           custom port
+        -q, --quiet          mute request and response log
+        --permissive         log validation error as warning instead of denying request
+        --use-example        use example provided in spec if exists
+        --static             generate static response
+        --static-types       generate static value for specified types, e.g. --static-types integer,string
+        --static-properties  generate static value for specified properties, e.g. --static-properties id,uuid
+
+    other options:
+        -v, --version
+        -h, --help
+
+    example:
+    In 3 different terminals
+    terminal 1: $ sudo hmt record
+    terminal 2: $ npm run dev
+    terminal 3: $ wget http://localhost:8000/http://localhost:3333/users/casewylie@gmail.com
+    terminal 3: wget http://localhost:8000/http://localhost:3333/users/cwylie@redhat.com
+
+    $ hmt build logs/localhost\:3333-recordings.jsonl --mode gen
+    $ sudo hmt mock openapi.yml
 
