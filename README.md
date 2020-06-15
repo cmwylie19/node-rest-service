@@ -12,7 +12,7 @@ npm run test:cov
 - api-sprout
 - prism
 
-#### Fakeit
+#### Apisprout
 
 OpenAPI mock built with the motivation to control response generation in a non intrusive manner to support development against a contract.
 
@@ -51,3 +51,55 @@ Command line options:
     example:
     $ fakeit --spec openapi.yml -p 3333 --static
     $ fakeit --spec openapi.yml -p 3333 --static-types
+
+### apiaprout
+
+Lightweight, blazing fast, cross-platform OpenAPI 3 mock server with Validation written in golang
+
+##### Features
+- radnom or static responses
+- request validation for json and mutlipart/form-data responses
+- health check
+
+
+##### Installation
+_make sure you have golang in your path_
+```
+go get github.com/danielgtaylor/apisprout
+```
+
+##### Usage
+
+    $ ./apisproute <Local file or remote url>
+Usage:
+  apisprout [flags] FILE
+
+Examples:
+  # Basic usage
+  apisprout openapi.yaml
+
+  # Validate server name and use base path
+  apisprout --validate-server openapi.yaml
+
+  # Fetch API via HTTP with custom auth header
+  apisprout -H 'Authorization: abc123' http://example.com/openapi.yaml
+
+Flags:
+ 
+
+Command line options:
+
+    $ apisprout --help
+    usage:
+        --add-server string   Add a new valid server URL, use with --validate-server
+        --disable-cors        Disable CORS headers
+        -H, --header string       Add a custom header when fetching API
+        -h, --help                help for apisprout
+        -p, --port int            HTTP port (default 8000)
+            --validate-request    Check request data structure
+        -s, --validate-server     Check scheme/hostname/basepath 
+        -w, --watch               Reload when input file changes
+
+    example:
+    $ ./apisprout -s openapi.yml
+    $ ./apisprout openapi.yml -p 3333
