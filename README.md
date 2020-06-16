@@ -151,6 +151,21 @@ now lets check the health of the mock server, you can expect a 200 response.
 curl -G http://localhost:3333/users/__health
 ```
 
+## openapi-mock 
+[openapi-mock github](https://github.com/penx/openapi-mock)
+
+This tool is another mock server that generates random data. 
+
+### Usage
+This tool does not have any extra features other than serving mock data based on the OAS.
+```
+./openapi-mock --specification-url openapi.yml
+```
+Now in a different terminal hit the `GET` /users with a curl
+```
+curl -G http://localhost:8000/users
+```
+
 
 ## HMT
 
