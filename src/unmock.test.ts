@@ -7,7 +7,7 @@ describe("unmock examople", () => {
       .mock("http://www.example.com")
       .get("/login")
       .reply(200, { ans: u.string() });
-    expect(true).toBeDefined();
+    expect(true);
   });
 });
 
