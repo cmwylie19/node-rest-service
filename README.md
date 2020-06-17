@@ -1,3 +1,5 @@
+![Node.js CI](https://github.com/cmwylie19/node-rest-service/workflows/Node.js%20CI/badge.svg)
+
 # 360 Enablement
 
 The purpose of this repo is to demo and describe the use cases around some tooling and libraries in the contract first development space. One of the tools that we are going to analyze, hmt, has the ability to proxy actual backend requests and generate a spec based on the proxy logs, which is why we have a simple backend service written in NodeJS. We will also use the NodeJS service top perform fuzz testing with `unmock`
