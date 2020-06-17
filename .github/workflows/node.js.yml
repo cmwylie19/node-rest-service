@@ -25,14 +25,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npm i
-    - run: npm run test:cov
+    - run: jest --silent --forceExit
 
 
-    - uses: actions/checkout@master
-    - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: cmwylie19/node-rest-service
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+#     - uses: actions/checkout@master
+#     - name: Publish to Registry
+#       uses: elgohr/Publish-Docker-Github-Action@master
+#       with:
+#         name: cmwylie19/node-rest-service
+#         username: ${{ secrets.DOCKERHUB_USERNAME }}
+#         password: ${{ secrets.DOCKERHUB_PASSWORD }}
