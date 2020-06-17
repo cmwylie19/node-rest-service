@@ -1,4 +1,4 @@
-import { mainRoutes } from "./mainRoutes";
+import { mainRoutes } from "./MainRoutes";
 
 describe("MainRoutes Class", async () => {
   it("expect instance of MainRoutes to be defined", () => {
