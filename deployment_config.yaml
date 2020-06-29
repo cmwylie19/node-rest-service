@@ -1,0 +1,94 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: 2020-06-29T20:04:01Z
+  generation: 2
+  labels:
+    app: node-rest-service
+    name: backend
+  name: node-rest-service
+  namespace: rest-service
+  resourceVersion: "9319"
+  selfLink: /apis/apps.openshift.io/v1/namespaces/rest-service/deploymentconfigs/node-rest-service
+  uid: acabe9f5-ba43-11ea-adad-0800270d37a0
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    app: node-rest-service
+    deploymentconfig: node-rest-service
+    name: backend
+  strategy:
+    activeDeadlineSeconds: 21600
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+      creationTimestamp: null
+      labels:
+        app: node-rest-service
+        deploymentconfig: node-rest-service
+        name: backend
+    spec:
+      containers:
+      - image: 172.30.1.1:5000/rest-service/node-rest-service@sha256:71c5a2d373e08371fd04e31bb275a488da0be994b1598e671b2f75429d69fdb9
+        imagePullPolicy: Always
+        name: node-rest-service
+        ports:
+        - containerPort: 3333
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - node-rest-service
+      from:
+        kind: ImageStreamTag
+        name: node-rest-service:latest
+        namespace: rest-service
+      lastTriggeredImage: 172.30.1.1:5000/rest-service/node-rest-service@sha256:71c5a2d373e08371fd04e31bb275a488da0be994b1598e671b2f75429d69fdb9
+    type: ImageChange
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: 2020-06-29T20:05:27Z
+    lastUpdateTime: 2020-06-29T20:05:27Z
+    message: Deployment config has minimum availability.
+    status: "True"
+    type: Available
+  - lastTransitionTime: 2020-06-29T20:05:28Z
+    lastUpdateTime: 2020-06-29T20:05:28Z
+    message: replication controller "node-rest-service-1" successfully rolled out
+    reason: NewReplicationControllerAvailable
+    status: "True"
+    type: Progressing
+  details:
+    causes:
+    - type: ConfigChange
+    message: config change
+  latestVersion: 1
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  unavailableReplicas: 0
+  updatedReplicas: 1

@@ -1,0 +1,48 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  creationTimestamp: 2020-06-29T20:04:01Z
+  labels:
+    app: node-rest-service
+    name: backend
+  name: node-rest-service
+  namespace: rest-service
+  resourceVersion: "8899"
+  selfLink: /apis/build.openshift.io/v1/namespaces/rest-service/buildconfigs/node-rest-service
+  uid: aca97539-ba43-11ea-adad-0800270d37a0
+spec:
+  failedBuildsHistoryLimit: 5
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: node-rest-service:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    git:
+      uri: https://github.com/cmwylie19/node-rest-service
+    type: Git
+  strategy:
+    dockerStrategy:
+      from:
+        kind: ImageStreamTag
+        name: node:latest
+    type: Docker
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - github:
+      secret: d6TjzvnJWM4ayDAjEtOl
+    type: GitHub
+  - generic:
+      secret: ebSj-reL4SvV-e_NzSzP
+    type: Generic
+  - type: ConfigChange
+  - imageChange:
+      lastTriggeredImageID: node@sha256:13c35ec2a3829f25171a8da49ea83366f7bf901cf0570002cd82769df49872be
+    type: ImageChange
+status:
+  lastVersion: 1
