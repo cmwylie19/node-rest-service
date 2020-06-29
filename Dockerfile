@@ -1,16 +1,12 @@
 FROM node
 
-RUN mkdir /app
-WORKDIR /app
-
-COPY package.json ./
-COPY package-lock.json ./
-
-RUN npm i && npm i -g typescript ts-node
+#RUN mkdir /app
+WORKDIR /
 
 COPY . .
+RUN npm i
 
-RUN npm run build
+#RUN npm run build
 
 EXPOSE 3333
-CMD ["npm","start"]
+CMD ["npm","run","dev"]
