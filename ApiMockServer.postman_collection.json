@@ -1,84 +1,95 @@
 {
-  "variables": [],
-  "info": {
-    "name": "Api Mock Server",
-    "_postman_id": "ea7b1c2b-c06a-1673-074a-aac1acf84ed4",
-    "description": "",
-    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "getUsers",
-      "request": {
-        "url": "http://localhost:3333/users",
-        "method": "GET",
-        "header": [],
-        "body": {},
-        "description": ""
-      },
-      "response": []
-    },
-    {
-      "name": "createUser",
-      "request": {
-        "url": "http://localhost:3333/users",
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "description": ""
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n\t\"email\":\"cwylie@gmail.com\",\n\t\"role\":\"admin\",\n\t\"name\":\"Casey Wylie\"\n}"
-        },
-        "description": ""
-      },
-      "response": []
-    },
-    {
-      "name": "getUser",
-      "request": {
-        "url": "http://localhost:3333/users/cwylie@gmail.com",
-        "method": "GET",
-        "header": [],
-        "body": {},
-        "description": ""
-      },
-      "response": []
-    },
-    {
-      "name": "editUser",
-      "request": {
-        "url": "http://localhost:3333/users/cwylie@gmail.com",
-        "method": "PUT",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json",
-            "description": ""
-          }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n\t\"email\":\"cwylie@gmail.com\",\n\t\"role\":\"super-admin\",\n\t\"name\":\"Casey Wylie\"\n}"
-        },
-        "description": ""
-      },
-      "response": []
-    },
-    {
-      "name": "deleteUser",
-      "request": {
-        "url": "http://localhost:3333/users/cwylie@gmail.com",
-        "method": "DELETE",
-        "header": [],
-        "body": {},
-        "description": ""
-      },
-      "response": []
-    }
-  ]
+	"variables": [],
+	"info": {
+		"name": "Api Mock Server",
+		"_postman_id": "ea7b1c2b-c06a-1673-074a-aac1acf84ed4",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getUsers",
+			"request": {
+				"url": "{{url}}/users",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "createUser",
+			"request": {
+				"url": "{{url}}/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"casewylie@gmail.com\",\n\t\"role\":\"admin\",\n\t\"name\":\"Casey Wylie\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getUser",
+			"request": {
+				"url": "{{url}}/users/casewylie@gmail.com",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "editUser",
+			"request": {
+				"url": "{{url}}/users/casewylie@gmail.com",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"casewylie@gmail.com\",\n\t\"role\":\"super-admin\",\n\t\"name\":\"Casey Wylie\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUser",
+			"request": {
+				"url": "{{url}}/users/casewylie@gmail.com",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3333/users/__health",
+			"request": {
+				"url": "{{url}}/users",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
 }
