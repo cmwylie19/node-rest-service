@@ -1,4 +1,5 @@
 ![Node.js CI](https://github.com/cmwylie19/node-rest-service/workflows/Node.js%20CI/badge.svg)
+[![codecov](https://codecov.io/gh/cmwylie19/node-rest-service/branch/master/graph/badge.svg)](https://codecov.io/gh/cmwylie19/node-rest-service)
 
 # 360 Enablement
 
